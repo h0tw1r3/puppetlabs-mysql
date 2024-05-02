@@ -14,14 +14,5 @@ on:
 
 jobs:
   label:
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: puppetlabs/community-labeller@v1.0.1
-        name: Label issues or pull requests
-        with:
-          label_name: community
-          label_color: '5319e7'
-          org_membership: puppetlabs
-          fail_if_member: 'true'
-          token: ${{ secrets.IAC_COMMUNITY_LABELER }}
+    if: contains(github.event.repository.owner, ['puppetlabs', 'puppet-toy-chest'])
+    uses: "h0tw1r3/cat-github-actions/.github/workflows/labeller.yml@forked-modules"
