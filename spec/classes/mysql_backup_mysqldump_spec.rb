@@ -51,6 +51,20 @@ describe 'mysql::backup::mysqldump' do
             minute: 5,
           )
         }
+
+        it {
+          is_expected.to contain_package('bzip2')
+        }
+      end
+
+      context 'without backupcomress' do
+        let(:params) do
+          { 'backupcompress' => false, }.merge(default_params)
+        end
+
+        it {
+          is_expected.not_to contain_package('bzip2')
+        }
       end
 
       context 'with compression_command' do
